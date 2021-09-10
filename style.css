@@ -1,0 +1,45 @@
+/*seletor { border: 10px solid #f00; }*/
+
+
+
+
+
+
+
+{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f1dcb0;
+
+    background-position: center;
+    background-size: cover;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
+.grid-element {
+     height: 50px;
+     width: 50px;
+ }
+
+#lab {
+    margin-left: 500px;
+      /*margin: 0 auto;*/
+      display: grid;
+      flex-wrap: wrap;
+      grid-template-columns: repeat(6,1fr);
+      grid-template-rows: repeat(6,1fr);
+      /*width:30px;*/
+      /*height:30px;*/
+      /*border: 25px solid; !* As 4 bordas sólidas com 25px de espessura *!*/
+      /*border-color: #2b4b17 #0f0 #2b4b17 #0f0; !* cores: topo, direita, inferior, esquerda *!*/
+  }
