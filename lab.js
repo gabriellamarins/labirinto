@@ -253,7 +253,8 @@ let lab1 =
                 ]
             }
         ]
-let pion= document.createElement("pion")
+
+let pion= document.getElementById("pion")
 
     for (let element of lab1) {
         let x = document.getElementById("lab");
@@ -263,12 +264,10 @@ let pion= document.createElement("pion")
         x.appendChild(div);
         div.setAttribute("class", "grid-element")
         div.setAttribute("id", "x" + element.posX + " " + "y" + element.posY);
-        pion.setAttribute("id", "x2" + element.posX + " " + "y2" + element.posY)
+      //  pion.setAttribute("id", "x2" + element.posX + " " + "y2" + element.posY)
         div.style.width = "80px";
         div.style.height = "80px";
-
-
-        console.log(lab1)
+ //       console.log(lab1)
 
 
         for (let i = 0; i < element.walls.length; i++) {
@@ -306,55 +305,95 @@ let pion= document.createElement("pion")
                     div.style.borderLeft = "solid #FFFFFF"
                 }
             }
-            console.log(element.walls[i])
+  //          console.log(element.walls[i])
         }
     }
 
 
-//
-
-// lab1.find(el => el.posX === pion.posX && el.posY === pion.posY )
-// console.log(pion)
-
-
-for(let element2 of lab1) {
-    pion = lab1[0]
-
-
-    let x_current = lab1[lab1.length - 1].posX;
-    let y_current = lab1[lab1.length - 1].posY;
-
-    console.log(pion)
-}
-//         while (pion.posX !== x_current && pion.posY !== y_current) {
-//
-//             console.log(pion)
-//            //pion ++;
-//             console.log(pion)
-//             console.log(element2.posY)
-//             let j = element2.posY[0];
-//             if (element2.walls[2] === false) {
-//                 element2.posY[j] ++;
-//            //pion++
-//
-//             }
-//          //  break;
-//        }
-//
-// }
-
-
-//https://medium.com/swlh/how-to-create-a-maze-with-javascript-36f3ad8eebc1
-//https://ichi.pro/fr/comment-creer-un-puzzle-labyrinthe-4357877815998
-
-// jogo -- https://www.the-art-of-web.com/javascript/maze-game/
-
-//!!! https://criarumjogo.com/scratch-online-como-criar-um-jogo-de-labirinto-scratch-aula-04-scratch-2-0/
-
-
 let case1 = document.getElementById("x0 y0").style.backgroundColor= "#FF8633";
 let case_last = document.getElementById("x4 y4").style.backgroundColor = "#FFC300"
-// case_last.style.bordeRight = "collapse"
+// case_last.style.borderRight = "collapse"
+
+
+
+let current = lab1.posX + lab1.posY + lab1.walls + lab1.visited;
+
+current = lab1[0]
+
+let x_last = lab1[lab1.length - 1].posX;
+let y_last= lab1[lab1.length - 1].posY;
+
+
+
+
+while (!(current.posX === x_last && current.posY === y_last )) { //testar o while com o for debaixo de 50, por exemplo , pra ver como funciona
+  // for (let i =0; i< 10; i++) {
+
+
+       let actual_position_y = current.posY;
+       let actual_position_x = current.posX;
+
+       if (current.walls[0] === false && current.visited === false) { // up
+           actual_position_y--
+       }
+       //   console.log(actual_position)
+
+       else if (current.walls[1] === false) { // right
+           actual_position_x++
+       }
+       else if (current.walls[2] === false) { //down
+               actual_position_y++
+
+       } else if (current.walls[3] === false && current.visited === false) { //left --- on enleve cette condition?
+           actual_position_x--
+       }
+
+       //     else if (current.posX === "x0" && current.posY === "y4") {
+       //     actual_position_x++
+       // }
+
+    // else if (current.walls[0] && current.walls[1] === false || current.walls[1] && current.walls[2] === false || current.walls[2] && current.walls[3] === false || current.walls [3] && current.walls[0] === false) {
+    //
+    // }
+
+
+
+    current =  lab1.find(el => el.posX === actual_position_x && el.posY === actual_position_y )
+
+    current.visited = true;
+
+    console.log(current);
+    console.log(actual_position_x);
+    console.log(actual_position_y);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
