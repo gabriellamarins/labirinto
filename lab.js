@@ -326,49 +326,50 @@ let y_last= lab1[lab1.length - 1].posY;
 
 
 
-while (!(current.posX === x_last && current.posY === y_last )) { //testar o while com o for debaixo de 50, por exemplo , pra ver como funciona
-  // for (let i =0; i< 10; i++) {
+//while (!(current.posX === x_last && current.posY === y_last )) { //testar o while com o for debaixo de 50, por exemplo , pra ver como funciona
+while (current.posX !== x_last && current.posY !== y_last ) {
+    for (let i = 0; i < 50; i++) {
 
 
-       let actual_position_y = current.posY;
-       let actual_position_x = current.posX;
-
-       if (current.walls[0] === false && current.visited === false) { // up
-           actual_position_y--
-       }
-       //   console.log(actual_position)
-
-       else if (current.walls[1] === false) { // right
-           actual_position_x++
-       }
-       else if (current.walls[2] === false) { //down
-               actual_position_y++
-
-       } else if (current.walls[3] === false && current.visited === false) { //left --- on enleve cette condition?
-           actual_position_x--
-       }
-
-       //     else if (current.posX === "x0" && current.posY === "y4") {
-       //     actual_position_x++
-       // }
-
-    // else if (current.walls[0] && current.walls[1] === false || current.walls[1] && current.walls[2] === false || current.walls[2] && current.walls[3] === false || current.walls [3] && current.walls[0] === false) {
-    //
-    // }
+        let actual_position_y = current.posY;
+        let actual_position_x = current.posX;
 
 
+        if (current.walls[0] === false && current.visited === false  ) {
+     //   if (!(current.walls[0] === true && current.visited === true)) { // up
+            actual_position_y--
+        }
+        //   console.log(actual_position)
 
-    current =  lab1.find(el => el.posX === actual_position_x && el.posY === actual_position_y )
+        else if (current.walls[1] === false) { // right
+            actual_position_x++
+        } else if (current.walls[2] === false) { //down
+            actual_position_y++
 
-    current.visited = true;
+        } else if (current.walls[3] === false && current.visited === false) { //left --- on enleve cette condition?
+            actual_position_x--
+        }
 
-    console.log(current);
-    console.log(actual_position_x);
-    console.log(actual_position_y);
+        //     else if (current.posX === "x0" && current.posY === "y4") {
+        //     actual_position_x++
+        // }
+
+        // else if (current.walls[0] && current.walls[1] === false || current.walls[1] && current.walls[2] === false || current.walls[2] && current.walls[3] === false || current.walls [3] && current.walls[0] === false) {
+        //
+        // }
+
+ //i++;
+        current = lab1.find(el => el.posX === actual_position_x && el.posY === actual_position_y)
+
+        current.visited = true;
+
+        console.log(current);
+        console.log(actual_position_x);
+        console.log(actual_position_y);
+
+    }
 
 }
-
-
 
 
 
