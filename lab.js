@@ -295,82 +295,82 @@ let case_last = document.getElementById("x4 y4").style.backgroundColor = "#FFC30
 
 // let posX = position.posX;
 // let posY = position.posY
-let posXlast = lab1[lab1.length - 1].posX;
-let posYlast = lab1[lab1.length - 1].posY;
+// let posXlast = lab1[lab1.length - 1].posX;
+// let posYlast = lab1[lab1.length - 1].posY;
 
-async function pathMaze(posX, posY) {
+async function solving_lab(posX, posY) {
 
-    let labyrtemp = [...lab1];
+    let lab_temp = [...lab1];
 
-    let currentPos = labyrtemp[0];
-    console.log("Start");
+    let current = lab_temp[0];
 
-    let x = currentPos.posX;
-    let y = currentPos.posY;
+
+    let x = current.posX;
+    let y = current.posY;
 
     while (!(x === lab1[lab1.length - 1].posX && y === lab1[lab1.length - 1].posY)) {
         // for (let i = 0; i < 20; i++) {
 
-        currentPos.status = "checked"
-        // currentPos.checked=true
-        console.log(currentPos)
-        let nbWalls = currentPos.walls.filter(wall => wall === true).length
-        console.log(nbWalls);
+        current.status = "checked"
+        // current.checked=true
+       // console.log(current)
+        let number_walls = current.walls.filter(wall => wall === true).length
 
 
-        if (nbWalls <= 1) {
-            console.log("intersection")
-            currentPos.repere = "intersection"
-          //  document.getElementById("x" + " " + currentPos.posX + " " + "y" + " " + currentPos.posY).style.backgroundColor = "E0CCCD"
 
-        } else if (nbWalls === 3) {
-            if (!(currentPos === labyrtemp[0])) {
-                currentPos.repere = "impasse"
-                console.log("impasse")
-                currentPos = document.getElementById("x" + " " + currentPos.posX + " " + "y" + " " + currentPos.posY);
-              //  currentPos.style.backgroundColor = "F3A682"
+        if (number_walls <= 1) {
+            console.log("Intersection")
+            current.repere = "intersection"
+          //  document.getElementById("x" + " " + current.posX + " " + "y" + " " + current.posY).style.backgroundColor = "E0CCCD"
+
+        } else if (number_walls === 3) {
+            if (!(current === lab_temp[0])) {
+                current.repere = "Cul-de-sac"
+                console.log("Cul-de-sac")
+                current = document.getElementById("x" + " " + current.posX + " " + "y" + " " + current.posY);
+              //  current.style.backgroundColor = "F3A682"
                 let intersectionList = lab1.filter(el => el.repere === "intersection")// crée un tableau qui contient les cases avec le repere=intersection
-                currentPos = intersectionList.find(el => el.repere === "intersection")
-                console.log(currentPos);
+                current = intersectionList.find(el => el.repere === "intersection")
+             //   console.log(current);
                 intersectionList.shift(); // retirer le premier élément du tableau
                 console.log(intersectionList);
-                currentPos.repere = "undefined";
-                x = currentPos.posX;
-                y = currentPos.posY;
-                //console.log(currentPos);
+                current.repere = "undefined";
+                x = current.posX;
+                y = current.posY;
+                //console.log(current);
                 //console.log(intersectionList)
             }
         }
 
-        if (currentPos.walls[0] === false && lab1.find(el => el.posY === y - 1 && el.posX === x).status === undefined) { //si pas de mur en haut
+        if (current.walls[0] === false && lab1.find(el => el.posY === y - 1 && el.posX === x).status === undefined) { //top
 
             y = y - 1;
 
-        } else if (currentPos.walls[1] === false && lab1.find(el => el.posX === x + 1 && el.posY === y).status === undefined) { //si pas de mur à droite
+        } else if (current.walls[1] === false && lab1.find(el => el.posX === x + 1 && el.posY === y).status === undefined) { //right
 
             x = x + 1;
 
-        } else if (currentPos.walls[2] === false && lab1.find(el => el.posY === y + 1 && el.posX === x).status === undefined) { //si pas de mur en bas
+        } else if (current.walls[2] === false && lab1.find(el => el.posY === y + 1 && el.posX === x).status === undefined) { //down
 
             y = y + 1;
 
-        } else if (currentPos.walls[3] === false && lab1.find(el => el.posX === x - 1 && el.posY === y).status === undefined) { //si pas de mur à gauche
+        } else if (current.walls[3] === false && lab1.find(el => el.posX === x - 1 && el.posY === y).status === undefined) { //left
 
             x = x - 1;
         }
 
-        currentPos = lab1.find(el => el.posX === x && el.posY === y)
+        current = lab1.find(el => el.posX === x && el.posY === y)
 
-         console.log(currentPos);
+         console.log(current);
         // await delay(200)
-        // displayAvancement(currentPos);
+        // displayAvancement(current);
     }
 
-    console.log("Finish!");
+    console.log("Félicitations ! Tu t'es échappé !");
 
 }
 
-pathMaze();
+solving_lab();
 
 // function displayAvancement(position) {
 //     position = document.getElementById("x" + " " + position.posX + " " + "y" + " " + position.posY)
