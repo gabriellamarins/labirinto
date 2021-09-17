@@ -271,9 +271,7 @@ for (let element of lab1) {
 
         if (element.walls[i]) {
 
-            if (i === element.walls[0]) {   //não funciona!!
-                div.style.color = "solid #FFC300"
-            }
+
             if (i === 0) {
                 //  top, right, bottom, left
                 div.style.borderTop = "solid #FFFFFF"
@@ -284,6 +282,8 @@ for (let element of lab1) {
                 div.style.borderBottom = "solid #FFFFFF"
             } else if (i === 3) {
                 div.style.borderLeft = "solid #FFFFFF"
+            }    if (i === element.walls[0]) {   //não funciona!!
+                div.style.color = "solid #FFC300"
             }
         }
     }
@@ -293,43 +293,40 @@ for (let element of lab1) {
 let case1 = document.getElementById("x0 y0").style.backgroundColor= "#FF8633";
 let case_last = document.getElementById("x4 y4").style.backgroundColor = "#FFC300"
 
-// let currentPosition = lab1[0];
-//
-// currentPosition = lab1.find(element => element.posX === currentPosition.posX && element.posY === currentPosition.posY)
-//
-// // console.log("  position de X : " + currentPosition.posX + "  position de Y : " + currentPosition.posY + 1)
-// console.log(currentPosition)
-
 
 function getNeighbor (posX, posY) {
     let neighbors = []
-    const currentPosition = lab1.find(el => el.posX === posX && el.posY === posY);
-    for (let i = 0; i < currentPosition.walls.length; i++) {
+   // let position = {"posX": posX, "posY": posY}
+   // let current;
+  const current = lab1.find(el => el.posX === posX && el.posY === posY);
+
+    for (let i = 0; i < current.walls.length; i++) {
         let neighbor;
-        if (!currentPosition.walls[i]) {
-            if (i === 0) {
-                const x = currentPosition.posX
-                const y = currentPosition.posY - 1
+
+        if (!current.walls[i]) {
+            if (i === 0) { //up
+                const x = current.posX
+                const y = current.posY - 1
                neighbor = lab1.find(el => el.posX === x && el.posY === y);
-      //          neighbors.push(neighbor)
+
             }
-            if (i === 1) {
-                const x = currentPosition.posX + 1
-                const y = currentPosition.posY
+            if (i === 1) { //right
+                const x = current.posX + 1
+                const y = current.posY
                 neighbor = lab1.find(el => el.posX === x && el.posY === y);
-      //          neighbors.push(neighbor)
+
             }
-            if (i === 2) {
-                const x = currentPosition.posX
-                const y = currentPosition.posY + 1
+            if (i === 2) { //down
+                const x = current.posX
+                const y = current.posY + 1
                 neighbor = lab1.find(el => el.posX === x && el.posY === y);
-             //   neighbors.push(neighbor)
+
             }
-            if (i === 3) {
-                const x = currentPosition.posX - 1
-                const y = currentPosition.posY
+            if (i === 3) { //left
+                const x = current.posX - 1
+                const y = current.posY
                 neighbor = lab1.find(el => el.posX === x && el.posY === y);
-                // neighbors.push(neighbor)
+
             }
             if (!neighbor.visited) {
                  neighbors.push (neighbor)
@@ -338,7 +335,7 @@ function getNeighbor (posX, posY) {
         }
 
     }
-  //  console.log(currentPosition)
+  //  console.log(current)
   //  console.log(neighbors)
     return neighbors
 
@@ -347,70 +344,122 @@ function getNeighbor (posX, posY) {
 
 
 //DFS
-//
+
 // async function DFS(lab1) {
-//     //     // Utiliser le posX & posY
-//     var currentPosition = lab1[0];
-//     let stack = [];
-//     stack.push(currentPosition);
-//     var neighbors;
 //
-//     var finish = lab1[lab1.length - 1]
-//     currentPosition.visited = false;
+//     let current = lab1[0];
+//     let stack = []; //cria o array da pilha
+//     stack.push(current);
+//     let neighbors;
 //
-//     while (stack.length > 0) {
-//         // .top retourne le derier élément de la pile (stack)
-//         currentPosition = stack.pop();
-//         currentPosition.visited = true;
+//     let last_pos = lab1[lab1.length - 1]
+//     current.visited = false;
 //
-//         if (currentPosition.posX === finish.posX && currentPosition.posY === finish.posY) {
-//             //    console.log(stack);
-//             return stack;
+//
+//     while (stack.length > 0) { //enquanto a pilha não estiver vazia...
+//
+//         current = stack.pop(); //envia o ultimo/primeiro elemento da pilha e marco como visitado
+//         current.visited = true;
+//
+//
+//
+//         if (current === lab1[lab1.length-1]) { //nada funcionaaaaaa AAAAHHHHHHHHH
+//             lab1.posX;
+//             lab1.posY ++;
+//         //    console.log(stack);
+//            // return stack;
+//            // current.posY ++
+//             break
 //         }
 //
 //
-//         neighbors = getNeighbor(currentPosition.posX, currentPosition.posY)
+//         // if (current.posX === last_pos.posX && current.posY === last_pos.posY) {
+//         //     //    console.log(stack);
+//         //     return stack;
+//         // }
+//
+//
+//         neighbors = getNeighbor(current.posX, current.posY)
 //         for (let neighbor of neighbors) {
-//             if (neighbor !== currentPosition.visited) {
-//                 stack.push(neighbor);
+//             if (neighbor !== current.visited) {
+//                 stack.push(neighbor); //se o neighbor ainda não tiver sido visitado, coloca na pilha
 //             }
 //
 //         }
-//         console.log(currentPosition)
+//         console.log(current)
+//
+//       //  console.log(stack)
+//
+//         await delay(400)
+//         colorPosition(current.posX, current.posY);
+//
 //     }
 //
 // }
+//
+// DFS(lab1)
 
-// console.log(DFS(lab1))
+
+
+
 
 
 //////
 
-async function BFS(lab1) { //
-    // usar o posx e o posy
-    let currentPosition = lab1[0];
+async function BFS(lab1) {
+
+ let current = lab1[0];
     let queue = [];
-    queue.push(currentPosition);
-    let neighbors;
+    queue.push(current);
+   let neighbors;
     let finish = lab1[lab1.length - 1];
-    currentPosition.visited = false;
+    current.visited = false;
+
     while (queue.length > 0) {
-        currentPosition = queue.shift();
-        currentPosition.visited = true;
-     //   await sleep(200)
-    //    colorPosition(currentPosition.posX, currentPosition.posY)
-        if (currentPosition.posX === finish.posX && currentPosition.posY === finish.posY) {
-           //  console.log(queue);
+
+        current = queue.shift();
+        current.visited = true;
+
+
+        if (current.posX === finish.posX && current.posY === finish.posY) {
+            // console.log(queue);
             return queue;
         }
-        neighbors = getNeighbor(currentPosition.posX, currentPosition.posY)
+
+        neighbors = getNeighbor(current.posX, current.posY)
         for (let neighbor of neighbors) {
-            if (neighbor !== currentPosition.visited) {
+
+            if (neighbor !== current.visited) {
+
                 queue.push(neighbor);
             }
         }
-        console.log(currentPosition)
+        console.log(current)
+        await delay(200)
+        colorPosition(current.posX, current.posY)
+
+
     }
+
+
 }
 
-console.log(BFS(lab1))
+
+function colorPosition(posX, posY) {
+
+    var position = document.getElementById("x" + posX + " " + "y" + posY)
+
+    position.style.backgroundColor = "#ffAc3359";
+}
+
+// Fonction de temps
+
+function delay(delayInms) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(2);
+        }, delayInms);
+    });
+}
+
+BFS (lab1)
